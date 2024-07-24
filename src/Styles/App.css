@@ -1,0 +1,31 @@
+nav {
+  background-color: #002b36;
+
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  border-bottom-style: solid;
+  border-color: #6a9a5b;
+  border-radius: 7px;
+
+  padding: 7px;
+
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+a:link,
+a:visited {
+  color: #f5f5dc;
+}
+
+a:hover {
+  color: #bdc3c7;
+}
+
+a:link,
+a:visited,
+a:hover {
+  text-decoration: none;
+  padding-right: 20px;
+}
