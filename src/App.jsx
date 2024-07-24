@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import About from "./Pages/About";
+import ActivityTimeTracker from "./Pages/ActivityTimeTracker";
+import Navigation from "./Components/Navigation";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState(null);
+
+  const handleLogin = () => setUser({ id: "1", name: "robin" });
+  const handleLogout = () => {
+    setUser(null);
+    <Navigate to="/" replace />;
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navigation user={user} handleLogout={handleLogout} />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route
+          path="login"
+          element={<Login user={user} handleLogin={handleLogin} />}
+        />
+        <Route path="register" element={<Register />} />
+        <Route
+          path="activityTimeTracker"
+          element={
+            <ProtectedRoute user={user}>
+              <ActivityTimeTracker user={user} />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="about" element={<About />} />
+        <Route path="*" element={<p>There is nothing here: 404!</p>} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
