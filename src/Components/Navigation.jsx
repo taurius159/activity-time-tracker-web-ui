@@ -6,7 +6,6 @@ function Navigation({ user, handleLogout }) {
     <nav>
       <Link to="/">Home</Link>
       {user && <Link to="/activityTimeTracker">Activity Time Tracker App</Link>}
-      <Link to="/about">About</Link>
       {user ? (
         <button onClick={handleLogout}>Logout</button>
       ) : (

@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import About from "./Pages/About";
 import ActivityTimeTracker from "./Pages/ActivityTimeTracker";
 import Navigation from "./Components/Navigation";
 import ProtectedRoute from "./Components/ProtectedRoute";
@@ -23,10 +22,7 @@ function App() {
       <Navigation user={user} handleLogout={handleLogout} />
       <Routes>
         <Route index element={<Home />} />
-        <Route
-          path="login"
-          element={<Login user={user} handleLogin={handleLogin} />}
-        />
+        <Route path="login" element={<Login user={user} setUser={setUser} />} />
         <Route path="register" element={<Register />} />
         <Route
           path="activityTimeTracker"
@@ -36,7 +32,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="about" element={<About />} />
         <Route path="*" element={<p>There is nothing here: 404!</p>} />
       </Routes>
     </>
