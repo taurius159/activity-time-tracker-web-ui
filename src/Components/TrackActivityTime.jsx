@@ -32,12 +32,15 @@ function TrackActivityTime({ token }) {
       setEndTime(new Date());
 
       try {
-        // await ActivityService.saveActivityRecord(
-        //   selectedActivity,
-        //   startTime.toISOString(),
-        //   new Date().toISOString(),
-        //   token
-        // );
+        const activityID = activities.find(
+          (x) => x.name === selectedActivity
+        ).id;
+        await ActivityService.saveActivityRecord(
+          activityID,
+          startTime.toISOString(),
+          new Date().toISOString(),
+          token
+        );
         setMessage("Activity record saved successfully");
       } catch (error) {
         setMessage("Failed to save activity record");
