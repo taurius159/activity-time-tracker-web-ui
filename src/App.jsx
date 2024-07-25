@@ -28,7 +28,7 @@ function App() {
           path="activityTimeTracker"
           element={
             <ProtectedRoute user={user}>
-              <ActivityTimeTracker user={user} />
+              <ActivityTimeTracker token={user} />
             </ProtectedRoute>
           }
         />
