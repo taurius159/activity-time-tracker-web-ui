@@ -21,6 +21,28 @@ class AuthService {
     const data = await response.json();
     return data.jwtToken;
   }
+
+  async register(email, password) {
+    const response = await fetch(`${API_URL}/Auth/Register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: email,
+        password: password,
+      }),
+    });
+
+    console.log(response);
+
+    if (!response.ok) {
+      throw new Error("Registration failed");
+    }
+
+    console.log("returning success response");
+    return response.data;
+  }
 }
 
 export default new AuthService();
