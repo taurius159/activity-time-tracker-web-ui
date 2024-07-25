@@ -16,28 +16,36 @@ function ActivityTimeTracker({ token }) {
     ActivityService.getActivities(token).then(setActivities);
   }
 
+  useEffect(() => {
+    //fix bug to be able to add activity when user has no activity. have loading and 0 activities as different conditions
+    ActivityService.getActivities(token).then(setActivities);
+  }, [token]);
+
   return (
     <div>
       <h2>Activity Time Tracker Application</h2>
-      <TrackActivityTime
-        token={token}
-        activities={activities}
-        setActivities={setActivities}
-        disabled={activities.length === 0}
-        onNwRecord={handleAddTimeRecord}
-      />
-      <button
-        onClick={() => setAddActivityFormVisible(!addActivityFormVisible)}
-      >
-        {addActivityFormVisible ? "Hide" : "Add New Activity"}
-      </button>
-      {addActivityFormVisible && (
-        <AddActivityForm token={token} onSuccess={handleAddActivity} />
-      )}
+
       {activities.length > 0 ? (
-        <ActivityTable activities={activities} />
+        <>
+          <TrackActivityTime
+            token={token}
+            activities={activities}
+            setActivities={setActivities}
+            disabled={activities.length === 0}
+            onNwRecord={handleAddTimeRecord}
+          />
+          <button
+            onClick={() => setAddActivityFormVisible(!addActivityFormVisible)}
+          >
+            {addActivityFormVisible ? "Hide" : "Add New Activity"}
+          </button>
+          <ActivityTable activities={activities} />
+        </>
       ) : (
         <p>Loading Data..</p>
+      )}
+      {addActivityFormVisible && (
+        <AddActivityForm token={token} onSuccess={handleAddActivity} />
       )}
     </div>
   );
