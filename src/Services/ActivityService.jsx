@@ -38,6 +38,27 @@ class ActivityService {
 
     return response.json();
   }
+
+  async addActivity(name, description, token) {
+    const response = await fetch(`${API_URL}/Activity`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name,
+        description,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Error: ${response.status} - ${errorText}`);
+    }
+
+    return response.json();
+  }
 }
 
 export default new ActivityService();

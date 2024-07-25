@@ -1,8 +1,7 @@
 import ActivityService from "../Services/ActivityService";
 import { useState, useEffect } from "react";
 
-function TrackActivityTime({ token }) {
-  const [activities, setActivities] = useState([]);
+function TrackActivityTime({ token, activities, setActivities }) {
   const [selectedActivity, setSelectedActivity] = useState("");
   const [timer, setTimer] = useState(0);
   const [isTiming, setIsTiming] = useState(false);
