@@ -1,7 +1,7 @@
 import ActivityService from "../Services/ActivityService";
 import { useState, useEffect } from "react";
 
-function TrackActivityTime({ token, activities, setActivities }) {
+function TrackActivityTime({ token, activities, onNwRecord }) {
   const [selectedActivity, setSelectedActivity] = useState("");
   const [timer, setTimer] = useState(0);
   const [isTiming, setIsTiming] = useState(false);
@@ -10,19 +10,6 @@ function TrackActivityTime({ token, activities, setActivities }) {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [sign, setSign] = useState("+");
-
-  useEffect(() => {
-    const fetchActivities = async () => {
-      try {
-        const data = await ActivityService.getActivities(token);
-        setActivities(data);
-      } catch (error) {
-        setMessage("Failed to fetch activities");
-      }
-    };
-
-    fetchActivities();
-  }, [token]);
 
   const handleStartStop = async () => {
     if (isTiming) {
@@ -40,6 +27,7 @@ function TrackActivityTime({ token, activities, setActivities }) {
           new Date().toISOString(),
           token
         );
+        onNwRecord();
         setMessage("Activity record saved successfully");
       } catch (error) {
         setMessage("Failed to save activity record");

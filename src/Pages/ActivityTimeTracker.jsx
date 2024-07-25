@@ -1,3 +1,4 @@
+import ActivityTable from "../Components/ActivityTable";
 import AddActivityForm from "../Components/AddActivityForm";
 import TrackActivityTime from "../Components/TrackActivityTime";
 import ActivityService from "../Services/ActivityService";
@@ -11,6 +12,10 @@ function ActivityTimeTracker({ token }) {
     setAddActivityFormVisible(false);
   };
 
+  function handleAddTimeRecord() {
+    ActivityService.getActivities(token).then(setActivities);
+  }
+
   return (
     <div>
       <h2>Activity Time Tracker Application</h2>
@@ -18,6 +23,8 @@ function ActivityTimeTracker({ token }) {
         token={token}
         activities={activities}
         setActivities={setActivities}
+        disabled={activities.length === 0}
+        onNwRecord={handleAddTimeRecord}
       />
       <button
         onClick={() => setAddActivityFormVisible(!addActivityFormVisible)}
@@ -26,6 +33,11 @@ function ActivityTimeTracker({ token }) {
       </button>
       {addActivityFormVisible && (
         <AddActivityForm token={token} onSuccess={handleAddActivity} />
+      )}
+      {activities.length > 0 ? (
+        <ActivityTable activities={activities} />
+      ) : (
+        <p>Loading Data..</p>
       )}
     </div>
   );
