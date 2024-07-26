@@ -64,23 +64,25 @@ function TrackActivityTime({ token, activities, onNwRecord }) {
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <button onClick={handleStartStop} disabled={!selectedActivity}>
+        <button
+          className="track-time-button"
+          onClick={handleStartStop}
+          disabled={!selectedActivity}
+        >
           {isTiming ? "Stop" : "Start"}
         </button>
+        {isTiming && (
+          <div>
+            <h3>
+              {`Time (HH:MM): ${new Date(timer * 1000)
+                .toISOString()
+                .substr(11, 5)}`}
+              <span>{` ${sign}`}</span>
+            </h3>
+            <h3>{`For: ${selectedActivity}`}</h3>
+          </div>
+        )}
       </div>
-      {isTiming && (
-        <div>
-          <h3>
-            {`Time (HH:MM): ${new Date(timer * 1000)
-              .toISOString()
-              .substr(11, 5)}`}
-            <span>{` ${sign}`}</span>
-          </h3>
-          <h3>{`For: ${selectedActivity}`}</h3>
-        </div>
-      )}
     </>
   );
 }

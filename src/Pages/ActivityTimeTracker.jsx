@@ -38,10 +38,14 @@ function ActivityTimeTracker({ token }) {
   }, [token]);
 
   return (
-    <div>
-      <h2>Activity Time Tracker Application</h2>
-
-      {loading && <p>Loading Data..</p>}
+    <div className="row">
+      {loading && (
+        <div className="row">
+          <div className="column">
+            <p>Loading Data..</p>
+          </div>
+        </div>
+      )}
 
       {activities.length === 0 && !loading && (
         <div>
@@ -52,24 +56,37 @@ function ActivityTimeTracker({ token }) {
 
       {!loading && activities.length > 0 && (
         <>
-          <TrackActivityTime
-            token={token}
-            activities={activities}
-            setActivities={setActivities}
-            disabled={activities.length === 0}
-            onNwRecord={handleAddTimeRecord}
-          />
-          <button
-            onClick={() => setAddActivityFormVisible(!addActivityFormVisible)}
-          >
-            {addActivityFormVisible ? "Hide" : "Add New Activity"}
-          </button>
-          <ActivityTable activities={activities} />
+          <div className="column">
+            <h2>Track Progress</h2>
+            <TrackActivityTime
+              token={token}
+              activities={activities}
+              setActivities={setActivities}
+              disabled={activities.length === 0}
+              onNwRecord={handleAddTimeRecord}
+            />
+          </div>
+          <div className="column">
+            <ActivityTable activities={activities} />
+          </div>
         </>
       )}
-      {addActivityFormVisible && (
-        <AddActivityForm token={token} onSuccess={handleAddActivity} />
-      )}
+      <div className="column">
+        {activities.length > 0 && !loading && (
+          <>
+            <h2>Add More Activities</h2>
+            <button
+              className="add-activity-button"
+              onClick={() => setAddActivityFormVisible(!addActivityFormVisible)}
+            >
+              {addActivityFormVisible ? "Hide" : "Add New Activity"}
+            </button>
+            {addActivityFormVisible && (
+              <AddActivityForm token={token} onSuccess={handleAddActivity} />
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }

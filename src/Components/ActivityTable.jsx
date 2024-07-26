@@ -4,7 +4,7 @@ import { calculateTotalTime } from "../Utils/DateUtils";
 function ActivityTable({ activities }) {
   return (
     <div>
-      <h2>Activity Summary</h2>
+      <h2>Your Progress</h2>
       <table>
         <thead>
           <tr>
