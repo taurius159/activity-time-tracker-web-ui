@@ -44,7 +44,7 @@ function Register() {
   }
 
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>

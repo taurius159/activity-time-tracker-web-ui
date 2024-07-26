@@ -24,7 +24,7 @@ function Login({ user, setUser }) {
 
   if (!user)
     return (
-      <div>
+      <div className="container">
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email">Email:</label>
