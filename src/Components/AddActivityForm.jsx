@@ -25,7 +25,7 @@ function AddActivityForm({ token, onSuccess }) {
   };
   return (
     <div>
-      <h2>Add New Activity</h2>
+      <h4>Add New Activity</h4>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="activityName">Activity Name:</label>
