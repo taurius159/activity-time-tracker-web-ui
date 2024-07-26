@@ -6,6 +6,7 @@ import Register from "./Pages/Register";
 import ActivityTimeTracker from "./Pages/ActivityTimeTracker";
 import Navigation from "./Components/Navigation";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import Footer from "./Components/Footer";
 import { useState } from "react";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         />
         <Route path="*" element={<p>There is nothing here: 404!</p>} />
       </Routes>
+      <Footer />
     </>
   );
 }
